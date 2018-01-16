@@ -76,33 +76,35 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   console.log(childSnapshot.val());
 
   // Store everything into a variable.
-  var empName = childSnapshot.val().name;
-  var empRole = childSnapshot.val().role;
-  var empStart = childSnapshot.val().start;
-  var empRate = childSnapshot.val().rate;
+  var trainName = childSnapshot.val().name;
+  var headedTo = childSnapshot.val().destination;
+  var freqTime = childSnapshot.val().frequency;
+  var nextTime = childSnapshot.val().nextArrival;
+  var waitTime = childSnapshot.val().minutesAway;
 
   // Employee Info
-  console.log(empName);
-  console.log(empRole);
-  console.log(empStart);
-  console.log(empRate);
+  console.log(trainName);
+  console.log(headedTo);
+  console.log(freqTime);
+  console.log(nextTime);
+  console.log(waitTime);
 
-  // Prettify the employee start
-  var empStartPretty = moment.unix(empStart).format("MM/DD/YY");
+//   // Prettify the employee start
+//   var empStartPretty = moment.unix(empStart).format("MM/DD/YY");
 
-  // Calculate the months worked using hardcore math
-  // To calculate the months worked
-  var empMonths = moment().diff(moment.unix(empStart, "X"), "months");
-  console.log(empMonths);
+//   // Calculate the months worked using hardcore math
+//   // To calculate the months worked
+//   var empMonths = moment().diff(moment.unix(empStart, "X"), "months");
+//   console.log(empMonths);
 
-  // Calculate the total billed rate
-  var empBilled = empMonths * empRate;
-  console.log(empBilled);
+//   // Calculate the total billed rate
+//   var empBilled = empMonths * empRate;
+//   console.log(empBilled);
 
-  // Add each train's data into the table
-  $("#employee-table > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" +
-  empStartPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td><td>" + empBilled + "</td></tr>");
-});
+//   // Add each train's data into the table
+//   $("#employee-table > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" +
+//   empStartPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td><td>" + empBilled + "</td></tr>");
+// });
 
 // Example Time Math
 // -----------------------------------------------------------------------------
