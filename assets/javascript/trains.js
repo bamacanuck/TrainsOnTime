@@ -41,30 +41,33 @@ $("#add-train-btn").on("click", function(event) {
   var waitTime = $("#wait-input").val().trim();
 
   // Creates local "temporary" object for holding employee data
-  var newEmp = {
-    name: empName,
-    role: empRole,
-    start: empStart,
-    rate: empRate
+  var newTrain = {
+    name: trainName,
+    destination: headedTo,
+    frequency: freqTime,
+    nextArrival: nextTime,
+    minutesAway: waitTime
   };
 
   // Uploads employee data to the database
-  database.ref().push(newEmp);
+  database.ref().push(newTrain);
 
   // Logs everything to console
-  console.log(newEmp.name);
-  console.log(newEmp.role);
-  console.log(newEmp.start);
-  console.log(newEmp.rate);
+  console.log(newTrain.name);
+  console.log(newTrain.destination);
+  console.log(newTrain.frequency);
+  console.log(newTrain.nextArrival);
+  console.log(newTrain.minutesAway);
 
   // Alert
-  alert("Employee successfully added");
+  alert("train successfully added");
 
   // Clears all of the text-boxes
-  $("#employee-name-input").val("");
-  $("#role-input").val("");
-  $("#start-input").val("");
-  $("#rate-input").val("");
+  $("#train-name-input").val("");
+  $("#destination-input").val("");
+  $("#freq-input").val("");
+  $("#next-input").val("");
+  $("#wait-input").val("");
 });
 
 // 3. Create Firebase event for adding employee to the database and a row in the html when a user adds an entry
