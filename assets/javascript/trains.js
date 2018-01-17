@@ -89,6 +89,17 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   console.log(nextTime);
   console.log(waitTime);
 
+// !!!!!!!!!!!!!!!! Use modulus (and Moment.js
+// to arrange calculation of the next
+// arrival time, absolutely, and relative
+// to the 'current' time.
+// 
+
+// !!!!!!!!!!!!!!!! If frequency is
+// equal to wait time, write something like
+// "Either the train is at the station,
+//or it just left!"
+
 //   // Prettify the employee start
 //   var empStartPretty = moment.unix(empStart).format("MM/DD/YY");
 
