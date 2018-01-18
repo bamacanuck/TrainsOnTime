@@ -95,11 +95,14 @@ db.ref().on("child_added", function(childSnapshot, prevChildKey) {
   var firstTimeFBase = childSnapshot.val().firstGo;
   var freqIntFBase = childSnapshot.val().trainInterval;
 
-  // Employee Info
+  // Info
   console.log(trainNameFBase);
   console.log(headedToFBase);
   console.log(firstTimeFBase);
   console.log(freqIntFBase);
+
+  // for a long time, I was forgetting - simply -
+  // to call this function (below)
 
     nextArrival(firstTimeFBase, freqIntFBase);
 
