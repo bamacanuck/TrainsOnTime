@@ -84,6 +84,10 @@ db.ref().on("child_added", function(childSnapshot, prevChildKey) {
   console.log(headedTo);
   console.log(firstTime);
   console.log(freqInt);
+
+  $("#trainTable > tbody").append("<tr><td>" + trainName + "</td><td>" + headedTo + "</td><td>" +
+  firstTime + "</td><td>" + freqInt + "</td><td>" + "" + "</td></tr>");
+
 });
 
 // !!!!!!!!!!!!!!!! Use modulus (and Moment.js
