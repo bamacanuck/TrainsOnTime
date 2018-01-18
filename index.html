@@ -56,9 +56,25 @@
 		</tr>
 	</table>
 
-	<form class="form-control">
-		Add Train
-	</form>
+	<form>
+      <div class="form-group">
+        <label for="train-name">train name</label>
+        <input class="form-control" id="trainNameAdd" type="text">
+      </div>
+      <div class="form-group">
+        <label for="destination">destination</label>
+        <input class="form-control" id="destinationAdd" type="text">
+      </div>
+      <div class="form-group">
+        <label for="first-train">first departure (HH:mm - "military time")</label>
+        <input class="form-control" id="firstDeparture" type="text">
+      </div>
+      <div class="form-group">
+        <label for="frequency">frequency (minutes)</label>
+        <input class="form-control" id="frequencyAdd" type="text">
+      </div>
+      <button class="btn btn-primary" id="addTrainBtn" type="submit">add new train data</button>
+    </form>
 </div>
 	
 </body>

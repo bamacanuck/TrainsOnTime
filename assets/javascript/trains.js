@@ -34,19 +34,17 @@ $("#add-train-btn").on("click", function(event) {
       // <th>minutes away</th>
 
   // Grabs user input
-  var trainName = $("#train-name-input").val().trim();
-  var headedTo = $("#destination-input").val().trim();
-  var freqTime = moment($("#freq-input").val().trim(), "DD/MM/YY").format("X");
-  var nextTime = $("#next-input").val().trim();
-  var waitTime = $("#wait-input").val().trim();
+  var trainName = $("#trainNameAdd").val().trim();
+  var headedTo = $("#destinationAdd").val().trim();
+  var firstTime = moment($("#firstDeparture").val().trim(), "DD/MM/YY").format("X");
+  var freqInt = $("#frequencyAdd").val().trim();
 
   // Creates local "temporary" object for holding employee data
   var newTrain = {
     name: trainName,
     destination: headedTo,
-    frequency: freqTime,
-    nextArrival: nextTime,
-    minutesAway: waitTime
+    firstGo: firstTime,
+    trainInterval: freqInt
   };
 
   // Uploads employee data to the database
@@ -55,19 +53,17 @@ $("#add-train-btn").on("click", function(event) {
   // Logs everything to console
   console.log(newTrain.name);
   console.log(newTrain.destination);
-  console.log(newTrain.frequency);
-  console.log(newTrain.nextArrival);
-  console.log(newTrain.minutesAway);
+  console.log(newTrain.firstGo);
+  console.log(newTrain.trainInterval);
 
   // Alert
-  alert("train successfully added");
+  alert("Another train is on our schedule!");
 
   // Clears all of the text-boxes
-  $("#train-name-input").val("");
-  $("#destination-input").val("");
-  $("#freq-input").val("");
-  $("#next-input").val("");
-  $("#wait-input").val("");
+  $("#trainNameAdd").val("");
+  $("#destinationAdd").val("");
+  $("#firstDeparture").val("");
+  $("#frequencyAdd").val("");
 });
 
 // 3. Create Firebase event for adding employee to the database and a row in the html when a user adds an entry
@@ -96,7 +92,7 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 // 
 
 // !!!!!!!!!!!!!!!! If frequency is
-// equal to wait time, write something like
+// equal to wait time, maybe 'alert' something like
 // "Either the train is at the station,
 //or it just left!"
 
