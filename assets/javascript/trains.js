@@ -23,8 +23,10 @@
   };
   firebase.initializeApp(config);
 
+  var db = firebase.database();
+
 // 2. Button for adding Employees
-$("#add-train-btn").on("click", function(event) {
+$("#addTrainBtn").on("click", function(event) {
   event.preventDefault();
 
       // <th>train</th>
@@ -36,7 +38,7 @@ $("#add-train-btn").on("click", function(event) {
   // Grabs user input
   var trainName = $("#trainNameAdd").val().trim();
   var headedTo = $("#destinationAdd").val().trim();
-  var firstTime = moment($("#firstDeparture").val().trim(), "DD/MM/YY").format("X");
+  var firstTime = $("#firstDeparture").val().trim();
   var freqInt = $("#frequencyAdd").val().trim();
 
   // Creates local "temporary" object for holding employee data
@@ -48,7 +50,7 @@ $("#add-train-btn").on("click", function(event) {
   };
 
   // Uploads employee data to the database
-  database.ref().push(newTrain);
+  db.ref().push(newTrain);
 
   // Logs everything to console
   console.log(newTrain.name);
@@ -67,7 +69,7 @@ $("#add-train-btn").on("click", function(event) {
 });
 
 // 3. Create Firebase event for adding employee to the database and a row in the html when a user adds an entry
-database.ref().on("child_added", function(childSnapshot, prevChildKey) {
+db.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
   console.log(childSnapshot.val());
 
@@ -84,6 +86,8 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   console.log(freqTime);
   console.log(nextTime);
   console.log(waitTime);
+
+});
 
 // !!!!!!!!!!!!!!!! Use modulus (and Moment.js
 // to arrange calculation of the next
