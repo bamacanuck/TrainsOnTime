@@ -88,6 +88,8 @@ db.ref().on("child_added", function(childSnapshot, prevChildKey) {
   $("#trainTable > tbody").append("<tr><td>" + trainName + "</td><td>" + headedTo + "</td><td>" +
   firstTime + "</td><td>" + freqInt + "</td><td>" + "" + "</td></tr>");
 
+// !!!!!!!!!!!!!!!!!!!! table data is out of place
+
 });
 
 // !!!!!!!!!!!!!!!! Use modulus (and Moment.js
