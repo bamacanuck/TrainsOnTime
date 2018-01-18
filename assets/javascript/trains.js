@@ -86,10 +86,10 @@ db.ref().on("child_added", function(childSnapshot, prevChildKey) {
   console.log(freqInt);
 
   $("#trainTable > tbody").append("<tr><td>" + trainName + "</td><td>" + headedTo + "</td><td>" +
-  firstTime + "</td><td>" + freqInt + "</td><td>" + "" + "</td></tr>");
+  freqInt + "</td><td>" + "" + "</td><td>" + "" + "</td></tr>");
 
-// !!!!!!!!!!!!!!!!!!!! table data is out of place
-
+// !!!!!!!!!!!!!!!!!!!! table data is incomplete, lacking
+// elements to be derived using Moment.js
 });
 
 // !!!!!!!!!!!!!!!! Use modulus (and Moment.js
