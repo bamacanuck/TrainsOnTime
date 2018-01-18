@@ -55,6 +55,35 @@ $("#addTrainBtn").on("click", function(event) {
   $("#frequencyAdd").val("");
 });
 
+//===================================================
+
+var minutesToGo;
+var nextOne;
+
+//create function
+function nextArrival(firstGo, freqInt){
+
+  var firstGoMJS = moment(firstGo,"hh:mm");
+
+  var nowTime = moment();
+
+//difference between current time and "first go" train time
+  var timeDelta = moment().diff(moment(firstGoMJS),"minutes");
+
+//use modulus to determine minutes 'left over'
+  var remainder = timeDelta % freqInt;
+
+//minutes to go, relative to now
+  minutesToGo = freqInt - remainder;
+
+  //to catch the "next one"
+  nextOne = moment().add(minutesToGo,"minutes");
+  nextOneMJS = moment(nextOne).format("hh:mm");
+}
+
+//===================================================
+
+
 // 3. Create Firebase event for adding employee to the database and a row in the html when a user adds an entry
 db.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
@@ -73,7 +102,7 @@ db.ref().on("child_added", function(childSnapshot, prevChildKey) {
   console.log(freqInt);
 
   $("#trainTable > tbody").append("<tr><td>" + trainName + "</td><td>" + headedTo + "</td><td>" +
-  freqInt + "</td><td>" + "" + "</td><td>" + "" + "</td></tr>");
+  freqInt + "</td><td>" + "" + "</td><td>" + minutesToGo + "</td></tr>");
 
 // !!!!!!!!!!!!!!!!!!!! table data is incomplete, lacking
 // elements to be derived using Moment.js
