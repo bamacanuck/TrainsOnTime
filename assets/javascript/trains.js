@@ -57,13 +57,10 @@ $("#addTrainBtn").on("click", function(event) {
 
 //===================================================
 
-var minutesToGo;
-var nextOne;
-
 //create function
-function nextArrival(firstGo, freqInt){
+function nextArrival(x, y){
 
-  var firstGoMJS = moment(firstGo,"hh:mm");
+  var firstGoMJS = moment(x,"hh:mm").subtract(1,"years");
 
   var nowTime = moment();
 
@@ -71,15 +68,18 @@ function nextArrival(firstGo, freqInt){
   var timeDelta = moment().diff(moment(firstGoMJS),"minutes");
 
 //use modulus to determine minutes 'left over'
-  var remainder = timeDelta % freqInt;
+  var remainder = timeDelta % y;
 
 //minutes to go, relative to now
-  minutesToGo = freqInt - remainder;
+  minutesToGo = y - remainder;
 
   //to catch the "next one"
   nextOne = moment().add(minutesToGo,"minutes");
   nextOneMJS = moment(nextOne).format("hh:mm");
 }
+
+var minutesToGo;
+var nextOne;
 
 //===================================================
 
@@ -90,56 +90,19 @@ db.ref().on("child_added", function(childSnapshot, prevChildKey) {
   console.log(childSnapshot.val());
 
   // Store everything into a variable.
-  var trainName = childSnapshot.val().name;
-  var headedTo = childSnapshot.val().destination;
-  var firstTime = childSnapshot.val().firstGo;
-  var freqInt = childSnapshot.val().trainInterval;
+  var trainNameFBase = childSnapshot.val().name;
+  var headedToFBase = childSnapshot.val().destination;
+  var firstTimeFBase = childSnapshot.val().firstGo;
+  var freqIntFBase = childSnapshot.val().trainInterval;
 
   // Employee Info
-  console.log(trainName);
-  console.log(headedTo);
-  console.log(firstTime);
-  console.log(freqInt);
+  console.log(trainNameFBase);
+  console.log(headedToFBase);
+  console.log(firstTimeFBase);
+  console.log(freqIntFBase);
 
-  $("#trainTable > tbody").append("<tr><td>" + trainName + "</td><td>" + headedTo + "</td><td>" +
-  freqInt + "</td><td>" + "" + "</td><td>" + minutesToGo + "</td></tr>");
+    nextArrival(firstTimeFBase, freqIntFBase);
 
-// !!!!!!!!!!!!!!!!!!!! table data is incomplete, lacking
-// elements to be derived using Moment.js
+  $("#trainTable > tbody").append("<tr><td>" + trainNameFBase + "</td><td>" + headedToFBase + "</td><td>" +
+  freqIntFBase + "</td><td>" + nextOneMJS + "</td><td>" + minutesToGo + "</td></tr>");
 });
-
-// !!!!!!!!!!!!!!!! Use modulus (and Moment.js
-// to arrange calculation of the next
-// arrival time, absolutely, and relative
-// to the 'current' time.
-// 
-
-// !!!!!!!!!!!!!!!! If frequency is
-// equal to wait time, maybe 'alert' something like
-// "Either the train is at the station,
-//or it just left!"
-
-//   // Prettify the employee start
-//   var empStartPretty = moment.unix(empStart).format("MM/DD/YY");
-
-//   // Calculate the months worked using hardcore math
-//   // To calculate the months worked
-//   var empMonths = moment().diff(moment.unix(empStart, "X"), "months");
-//   console.log(empMonths);
-
-//   // Calculate the total billed rate
-//   var empBilled = empMonths * empRate;
-//   console.log(empBilled);
-
-//   // Add each train's data into the table
-//   $("#employee-table > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" +
-//   empStartPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td><td>" + empBilled + "</td></tr>");
-// });
-
-// Example Time Math
-// -----------------------------------------------------------------------------
-// Assume Employee start date of January 1, 2015
-// Assume current date is March 1, 2016
-
-// We know that this is 15 months.
-// Now we will create code in moment.js to confirm that any attempt we use mets this test case
