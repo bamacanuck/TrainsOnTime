@@ -76,17 +76,14 @@ db.ref().on("child_added", function(childSnapshot, prevChildKey) {
   // Store everything into a variable.
   var trainName = childSnapshot.val().name;
   var headedTo = childSnapshot.val().destination;
-  var freqTime = childSnapshot.val().frequency;
-  var nextTime = childSnapshot.val().nextArrival;
-  var waitTime = childSnapshot.val().minutesAway;
+  var firstTime = childSnapshot.val().firstGo;
+  var freqInt = childSnapshot.val().trainInterval;
 
   // Employee Info
   console.log(trainName);
   console.log(headedTo);
-  console.log(freqTime);
-  console.log(nextTime);
-  console.log(waitTime);
-
+  console.log(firstTime);
+  console.log(freqInt);
 });
 
 // !!!!!!!!!!!!!!!! Use modulus (and Moment.js
